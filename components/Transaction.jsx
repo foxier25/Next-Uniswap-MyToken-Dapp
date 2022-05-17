@@ -33,12 +33,14 @@ const Transaction = ({
           <FaEthereum />
           <span>{txAmount}</span>
           <p>sent to</p>
-          <span>{username(receiver)}</span>
-          <p>on</p>
+          <span className="text-orange-400 hover:underline">
+            {username(receiver)}
+          </span>
+          <span className="ml-3">•</span>
           <TimeAgo date={date_time(timeStamp)} />
           <div
             className="flex cursor-pointer items-center gap-x-1
-       text-blue-500 transition-all ease-in-out hover:text-blue-600"
+       text-blue-600 transition-all ease-in-out hover:text-blue-500"
           >
             <img
               className="ml-4 mr-1 w-4 object-contain invert"

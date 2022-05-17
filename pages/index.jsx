@@ -215,9 +215,7 @@ const Home = () => {
           <TokenModal setTokenModal={setTokenModal} setToken={setToken} />
         )}
         {alert && <ErrorModel transactionFailed closeModal={setAlert} />}
-        {networkApproved && (
-          <ErrorModel selectedNetwork closeModal={setNetworkApproved} />
-        )}
+        {networkApproved && <ErrorModel selectedNetwork />}
       </AnimatePresence>
     </div>
   )
