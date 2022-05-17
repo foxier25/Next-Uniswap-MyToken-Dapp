@@ -1,27 +1,41 @@
-# Next.js + Tailwind CSS Example
+# Uniswap Clone
 
-This example shows how to use [Tailwind CSS](https://tailwindcss.com/) [(v3.0)](https://tailwindcss.com/blog/tailwindcss-v3) with Next.js. It follows the steps outlined in the official [Tailwind docs](https://tailwindcss.com/docs/guides/nextjs).
+![alt text](https://1bitcoin.wiki/wp-content/uploads/2021/04/8e7ed0_0065e226d9944340bff93a8bb04fec15_mv2-1000x520.jpg)
+Uniswap cryptocurrency exchange tool.
 
-## Preview
+## Dependencies
 
-Preview the example live on [StackBlitz](http://stackblitz.com/):
+### [ethereum-waffle](https://www.npmjs.com/package/ethereum-waffle)
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-tailwindcss)
+The most advanced framework for testing smart contracts.
 
-## Deploy your own
+### [ethers](https://www.npmjs.com/package/ethers)
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+A complete Ethereum wallet implementation and utilities in JavaScript (and TypeScript).
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-tailwindcss&project-name=with-tailwindcss&repository-name=with-tailwindcss)
+### [hardhat](https://www.npmjs.com/package/hardhat)
 
-## How to use
+Hardhat is an Ethereum development environment for professionals. It facilitates performing frequent tasks, such as running tests, automatically checking code for mistakes or interacting with a smart contract.
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## Hardhat Plugins
 
-```bash
-npx create-next-app --example with-tailwindcss with-tailwindcss-app
-# or
-yarn create next-app --example with-tailwindcss with-tailwindcss-app
-```
+![alt text](https://user-images.githubusercontent.com/176499/96893278-ebc67580-1460-11eb-9530-d5df3a3d65d0.png)
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+### [hardhat-ethers](https://hardhat.org/plugins/nomiclabs-hardhat-ethers.html)
+
+This plugin brings to Hardhat the Ethereum library ethers.js, which allows you to interact with the Ethereum blockchain in a simple way.
+
+### [hardhat-waffle](https://hardhat.org/plugins/nomiclabs-hardhat-waffle.html)
+
+You can use this plugin to build smart contract tests using Waffle in Hardhat, taking advantage of both.
+
+This plugin adds a Hardhat-ready version of Waffle to the Hardhat Runtime Environment, and automatically initializes the Waffle Chai matchers.
+
+## API Endpoints for tokens
+
+https://api.coinmarketcap.com/data-api/v3/uniswap/all.json
+https://tokens.coingecko.com/uniswap/all.json
+https://app.tryroll.com/tokens.json
+https://bridge.arbitrum.io/token-list-42161.json
+https://static.optimism.io/optimism.tokenlist.json
+https://tokens.uniswap.org/
