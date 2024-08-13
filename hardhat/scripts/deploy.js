@@ -1,11 +1,16 @@
+
 async function main() {
-  const [deployer] = await ethers.getSigners()
+  const PRIVATE_KEY = "0x3011ee2293ad66d2790cd20c9740d1f2b859533b6e939365fa09962f13f02f06";
+  // Connect to the Sepolia network with a private key
+  const provider = new ethers.providers.JsonRpcProvider('https://sepolia.infura.io/v3/a5fa20d5b3e44dabb3df2c581fe3b2b5');
+  const deployer = new ethers.Wallet(PRIVATE_KEY, provider);
+
 
   console.log('Deploying contracts with the account:', deployer.address)
   console.log('Account balance:', (await deployer.getBalance()).toString())
 
   // deploy contracts here:
-  const uniswapFactory = await ethers.getContractFactory('Uniswap')
+  const uniswapFactory = await ethers.getContractFactory('UniswapInteraction', deployer)
   uniswapContract = await uniswapFactory.deploy()
 
   console.log('Smart contract address:', uniswapContract.address)

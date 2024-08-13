@@ -48,7 +48,7 @@ const Transaction = ({
               alt="etherscan"
             />
             <a
-              href={'https://ropsten.etherscan.io/tx/' + txHash}
+              href={'https://sepolia.etherscan.io/tx/' + txHash}
               target="_blank"
             >
               View on Etherscan

@@ -7,7 +7,7 @@ import { username } from '../utils/utils'
 const Header = ({ account }) => {
   return (
     <div className="fixed top-0 z-50 flex w-full items-center justify-between p-3 pr-7 md:py-5 md:pr-10">
-      <img
+      {/* <img
         className="mr-10 mb-2 h-12 object-contain"
         src="/uniswap1.png"
         alt="logo"
@@ -21,12 +21,12 @@ const Header = ({ account }) => {
           <span>Charts</span>
           <FiArrowUpRight />
         </div>
-      </div>
+      </div> */}
 
       <div className="flex items-center space-x-3 lg:flex-grow lg:justify-end">
         <div className="hidden items-center gap-x-2 rounded-xl bg-gray-900 p-3 font-medium md:flex">
           <img className="h-6 object-contain" src="/eth.png" alt="eth" />
-          <p>Ethereum</p>
+          <p>Sepolia</p>
           <CgChevronDown />
         </div>
 

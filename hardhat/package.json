@@ -4,10 +4,19 @@
   "description": "shortcuts for commands",
   "scripts": {
     "deploy": "npx hardhat run scripts/deploy.js --network localhost",
-    "deploy-ropsten": "npx hardhat run scripts/deploy.js --network ropsten",
+    "deploy-sepolia": "npx hardhat run scripts/deploy.js --network sepolia",
     "chain": "npx hardhat node",
     "test": "npx hardhat test test/swap.test.js"
   },
   "author": "emiz",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
+    "hardhat-verify": "^1.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.4"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
 }

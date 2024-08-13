@@ -1,19 +1,22 @@
+const { ethers } = require('hardhat');
 const { expect } = require('chai')
 
 const toWei = (num) => ethers.utils.parseEther(num.toString())
 const toEth = (num) => ethers.utils.formatEther(num)
 
 describe('Uniswap', () => {
-  let uniswapContract
-  let deployer, sender, receiver, user, users
+  let uniswapContract;
+  let deployer, sender, receiver, user, users;
 
   before(async () => {
     // Get the ContractFactory and Signers here.
-    const uniswapContractFactory = await ethers.getContractFactory('Uniswap')
-    ;[deployer, sender, receiver, user, ...users] = await ethers.getSigners()
+    const UniswapContractFactory = await ethers.getContractFactory('Uniswap');
+    [deployer, sender, receiver, user, ...users] = await ethers.getSigners();
 
     // Deploy contract
-    uniswapContract = await uniswapContractFactory.deploy()
+    uniswapContract = await UniswapContractFactory.deploy();
+    await uniswapContract.deployed();
+
   })
 
   describe('Deployment', () => {

@@ -6,7 +6,7 @@ import Token from './Token'
 import data from '../MockAPI/uniswapData'
 import trendingData from '../MockAPI/trendingData'
 
-const TokenModal = ({ setTokenModal, setToken }) => {
+const TokenModal = ({ setTokenModal, setToken}) => {
   const [tokens, setTokens] = useState([])
   const [filteredTokens, setFilteredTokens] = useState(null)
 
@@ -94,18 +94,18 @@ const TokenModal = ({ setTokenModal, setToken }) => {
           {trendingData.map(({ symbol, logoURI }, i) => (
             <div
               onClick={() => {
-                setToken({ symbol, logo: logoURI })
+                logoURI ? setToken({ symbol, logo: logoURI }) : setToken({ symbol})
                 setTokenModal(false)
               }}
               key={i}
               className="flex cursor-pointer items-center gap-x-2 rounded-xl 
             border border-gray-600 p-2 transition ease-in-out hover:bg-gray-800"
             >
-              <img
+              {logoURI && <img
                 className="h-6 object-contain"
                 src={logoURI}
                 alt="trendingToken"
-              />
+              />}
               <h3 className="font-medium">{symbol}</h3>
             </div>
           ))}
