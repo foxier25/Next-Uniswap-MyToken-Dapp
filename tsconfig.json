@@ -15,6 +15,6 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "hardhat/hardhat.config.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "hardhat/hardhat.config.js", "components/Connect.jsx", "context/index.jsx", "config/index.js", "pages/layout.jsx"],
   "exclude": ["node_modules"]
 }

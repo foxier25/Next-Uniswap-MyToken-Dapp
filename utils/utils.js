@@ -34,53 +34,6 @@ const fetchAbi = async (contractAddress) => {
   }
 };
 
-// export const getMyTransfers = async (contract) => {
-//   const transfers = await contract.getTransfers()
-//   let temp = []
-//   for (let i = 0; i < transfers.length; i++) {
-//     let obj = {
-//       id: ethers.BigNumber.from(transfers[i].id).toNumber(),
-//       receiver: transfers[i].receiver,
-//       sender: transfers[i].sender,
-//       timeStamp: ethers.BigNumber.from(transfers[i].timeStamp).toNumber(),
-//       txHash: transfers[i].txHash,
-//       txAmount: toEth(ethers.BigNumber.from(transfers[i].txAmount)),
-//     }
-//     console.log(transfers);
-//     // console.log("id:", ethers.BigNumber.from(transfers[i].id).toNumber());
-//     // console.log("receiver:", transfers[i].receiver);
-//     // console.log("sender:", transfers[i].sender);
-//     // console.log("timeStamp:", ethers.BigNumber.from(transfers[i].timeStamp).toNumber());
-//     // console.log("txHash:", transfers[i].txHash);
-//     // console.log("txAmount:", toEth(ethers.BigNumber.from(transfers[i].txAmount)));
-//     temp.push(obj)
-//   }
-//   return temp
-// }
-
-// export const getMyReceivers = async (contract) => {
-//   const transfers = await contract.getReceivers()
-//   let temp = []
-//   for (let i = 0; i < transfers.length; i++) {
-//     let obj = {
-//       id: ethers.BigNumber.from(transfers[i].id).toNumber(),
-//       receiver: transfers[i].receiver,
-//       sender: transfers[i].sender,
-//       timeStamp: ethers.BigNumber.from(transfers[i].timeStamp).toNumber(),
-//       txHash: transfers[i].txHash,
-//       txAmount: toEth(ethers.BigNumber.from(transfers[i].txAmount)),
-//     }
-//     temp.push(obj)
-//   }
-//   return temp
-// }
-
-// export const setTransaction = async (contract, _receiver, _amount) => {
-//   const tx = await (
-//     await contract.sendEth(_receiver, { value: toWei(_amount) })
-//   ).wait()
-// }
-
 export const setTransaction = async (contract, _tokenA, _tokenB, _amountA, _amountB, _receiver) => {
   const amountA = ethers.utils.parseEther(_amountA); // Assuming _amountA is in Ether
   const amountB = ethers.utils.parseEther(_amountB); // Assuming _amountB is in Ether
@@ -96,6 +49,13 @@ export const setTransaction = async (contract, _tokenA, _tokenB, _amountA, _amou
   const tx2 = await (
     await contract.performSwap(_tokenA, _tokenB, amountA, amountB, _receiver)
   ).wait()
+}
+
+export const getSwapAmount = async (contract, _tokenA, _tokenB, _amountA) => {
+  const amountA = ethers.utils.parseEther(_amountA); // Assuming _amountA is in Ether
+  const tokenBAmount = await contract.getMinOutputAmount(_tokenA, _tokenB, amountA);
+  const tokenB18Amount = ethers.utils.formatEther(tokenBAmount);
+  return tokenB18Amount;
 }
 
 export const username = (address) => {

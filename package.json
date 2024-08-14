@@ -10,6 +10,7 @@
     "@tanstack/react-query": "^5.24.8",
     "@web3modal/wagmi": "^5.0.11",
     "axios": "^1.7.3",
+    "eslint": "^9.9.0",
     "ethers": "^5.6.5",
     "framer-motion": "^6.3.3",
     "next": "^14.2.3",
@@ -17,7 +18,9 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
     "react-jazzicon": "^1.0.3",
-    "react-timeago": "^6.2.1"
+    "react-timeago": "^6.2.1",
+    "viem": "^2.17.8",
+    "wagmi": "^2.12.2"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
