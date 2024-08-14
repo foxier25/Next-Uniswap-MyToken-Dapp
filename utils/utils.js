@@ -14,8 +14,7 @@ export const getContract = async (signer) => {
   return contract
 }
 
-const apiKey = "D56UARBKYISM7N1191ER9N39FQFXBYTSJI"; // Etherscan API key
-
+const apiKey = process.env['ETHERSCAN_API_KEY'];
 // Function to fetch ABI from Etherscan
 const fetchAbi = async (contractAddress) => {
   const url = `https://api-sepolia.etherscan.io/api?module=contract&action=getabi&address=${contractAddress}&apikey=${apiKey}`;
@@ -35,26 +34,27 @@ const fetchAbi = async (contractAddress) => {
 };
 
 export const setTransaction = async (contract, _tokenA, _tokenB, _amountA, _amountB, _receiver) => {
-  const amountA = ethers.utils.parseEther(_amountA); // Assuming _amountA is in Ether
-  const amountB = ethers.utils.parseEther(_amountB); // Assuming _amountB is in Ether
+  const amountA = toWei(_amountA); // Assuming _amountA is in Ether
+  const amountB = toWei(_amountB); // Assuming _amountB is in Ether
 
   const abi = await fetchAbi(_tokenA);
   const provider = new ethers.providers.Web3Provider(window.ethereum)
   const myTokenContract = new ethers.Contract(_tokenA, abi, provider.getSigner())
-  const tx1 = await myTokenContract.approve(contract.address, amountA);
-  const receipt = await tx1.wait(); // Wait for the transaction to be mined
-  
-  console.log("Approval transaction receipt:", receipt);
+  const tx1 = await (
+    await myTokenContract.approve(contract.address, amountA)
+  ).wait();
+  console.log("Approval transaction receipt:", tx1);
 
   const tx2 = await (
     await contract.performSwap(_tokenA, _tokenB, amountA, amountB, _receiver)
-  ).wait()
+  ).wait();
+  console.log("Swap transaction receipt:", tx2);
 }
 
 export const getSwapAmount = async (contract, _tokenA, _tokenB, _amountA) => {
-  const amountA = ethers.utils.parseEther(_amountA); // Assuming _amountA is in Ether
+  const amountA = toWei(_amountA); // Assuming _amountA is in Ether
   const tokenBAmount = await contract.getMinOutputAmount(_tokenA, _tokenB, amountA);
-  const tokenB18Amount = ethers.utils.formatEther(tokenBAmount);
+  const tokenB18Amount = toEth(tokenBAmount);
   return tokenB18Amount;
 }
 

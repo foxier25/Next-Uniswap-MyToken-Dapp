@@ -15,10 +15,6 @@ const TokenModal = ({ setTokenModal, setToken}) => {
   }, [])
 
   const fetchTokens = async () => {
-    // const req = await fetch('https://tokens.uniswap.org').then((res) =>
-    //   res.json()
-    // )
-    // setTokens(req.tokens)
     setTokens(data)
   }
 
@@ -135,11 +131,10 @@ const TokenModal = ({ setTokenModal, setToken}) => {
               ))}
         </div>
         <div
-          className="flex cursor-pointer items-center justify-center gap-x-2 rounded-b-xl 
-        bg-gray-800 px-5 py-4 text-lg text-blue-500 hover:text-blue-400"
+          className="flex items-center justify-center gap-x-2 rounded-b-xl 
+        bg-gray-800 px-5 py-4 text-lg text-blue-500"
         >
-          <BiEdit />
-          <span>Manage Token Lists</span>
+          <span>Token Lists</span>
         </div>
       </motion.div>
     </motion.div>

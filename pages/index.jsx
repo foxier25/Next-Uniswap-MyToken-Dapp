@@ -30,7 +30,6 @@ const Home = () => {
     tokenBAddress: null,
     receiver: null,
   })
-  const [networkApproved, setNetworkApproved] = useState(false)
   const [alert, setAlert] = useState(false)
 
   useEffect(() => {
@@ -94,7 +93,7 @@ const Home = () => {
 
   const callGetSwapAmount = async (e) => {
     if(e.target.value == null || e.target.value == "" || parseFloat(e.target.value, 10) == 0) {
-      setSwapDetails({ ...swapDetails, tokenBAmount: "0" })
+      setSwapDetails({ ...swapDetails, tokenBAmount: "0", tokenAAmount: e.target.value })
       return
     }
     if(!(!tokenA || !tokenB || tokenA && tokenB && tokenA.symbol == tokenB.symbol || tokenA == tokenB)) {
@@ -105,7 +104,7 @@ const Home = () => {
         flag ? RRMAddress : WETHAddress,
         e.target.value
       );
-      setSwapDetails({ ...swapDetails, tokenBAmount: tokenBAmount })
+      setSwapDetails({ ...swapDetails, tokenBAmount: tokenBAmount.toString(), tokenAAmount: e.target.value })
     }
   }
 
@@ -115,7 +114,7 @@ const Home = () => {
     flex-col justify-between bg-gradient-to-b from-[#2D242F] to-[#191b1f] text-white"
     >
       <main className="h-screen overflow-hidden p-3 md:p-5">
-        <Header account={account} />
+        <Header/>
 
         <div className="m-5 mx-auto mt-28 max-w-lg rounded-3xl bg-gray-900 p-3 md:mt-40">
           <div className="mb-3 ml-2 flex items-center justify-between text-lg font-medium">
@@ -132,9 +131,7 @@ const Home = () => {
                 type="number"
                 placeholder="0.0"
                 step={0.00001}
-                onChange={(e) => {
-                  
-                  setSwapDetails({ ...swapDetails, tokenAAmount: e.target.value });
+                onChange={async (e) => {
                   callGetSwapAmount(e);
                 }
                 }
