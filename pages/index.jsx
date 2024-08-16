@@ -9,11 +9,13 @@ import Header from '../components/Header'
 import TokenModal from '../components/TokenModal'
 import {
   getContract,
-  RRMAddress,
+  MTKAddress,
   setTransaction,
   getSwapAmount,
   WETHAddress
 } from '../utils/utils'
+
+const MyTokenSymbol = "MTK"
 
 const Home = () => {
   const [tokenModal, setTokenModal] = useState(false)
@@ -57,23 +59,23 @@ const Home = () => {
     e.preventDefault()
     setIsSwapping(true)
     let flag = true;
-    if (tokenA.symbol == "RRM") {
+    if (tokenA.symbol == "MTK") {
       flag = false;
-      setSwapDetails({...swapDetails, tokenAAddress: RRMAddress, tokenBAddress: WETHAddress});
+      setSwapDetails({...swapDetails, tokenAAddress: MTKAddress, tokenBAddress: WETHAddress});
     }
     else {
-      setSwapDetails({ ...swapDetails, tokenAAddress: WETHAddress, tokenBAddress: RRMAddress});
+      setSwapDetails({ ...swapDetails, tokenAAddress: WETHAddress, tokenBAddress: MTKAddress});
     }
     console.log("info----   ",
-      flag ? WETHAddress : RRMAddress,
-      flag ? RRMAddress : WETHAddress,
+      flag ? WETHAddress : MTKAddress,
+      flag ? MTKAddress : WETHAddress,
       swapDetails.tokenAAmount,
       swapDetails.tokenBAmount,
       swapDetails.receiver);
 
     setTransaction(contract,
-      flag ? WETHAddress : RRMAddress,
-      flag ? RRMAddress : WETHAddress,
+      flag ? WETHAddress : MTKAddress,
+      flag ? MTKAddress : WETHAddress,
       swapDetails.tokenAAmount,
       swapDetails.tokenBAmount,
       swapDetails.receiver)
@@ -98,10 +100,10 @@ const Home = () => {
     }
     if(!(!tokenA || !tokenB || tokenA && tokenB && tokenA.symbol == tokenB.symbol || tokenA == tokenB)) {
       let flag = true;
-      if (tokenA.symbol == "RRM") flag = false;
+      if (tokenA.symbol == "MTK") flag = false;
       const tokenBAmount = await getSwapAmount(contract,
-        flag ? WETHAddress : RRMAddress,
-        flag ? RRMAddress : WETHAddress,
+        flag ? WETHAddress : MTKAddress,
+        flag ? MTKAddress : WETHAddress,
         e.target.value
       );
       setSwapDetails({ ...swapDetails, tokenBAmount: tokenBAmount.toString(), tokenAAmount: e.target.value })

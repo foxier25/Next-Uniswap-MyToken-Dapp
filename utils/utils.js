@@ -7,7 +7,7 @@ export const toWei = (num) => ethers.utils.parseEther(num.toString())
 export const toEth = (num) => ethers.utils.formatEther(num)
 
 export const WETHAddress = "0x7b79995e5f793A07Bc00c21412e50Ecae098E7f9";
-export const RRMAddress = "0x1d3999858b8f589072944e55c31Af0F32cF8F7D1";
+export const MTKAddress = "0x1d3999858b8f589072944e55c31Af0F32cF8F7D1";
 
 export const getContract = async (signer) => {
   const contract = new ethers.Contract(uniswap.address, uniswapAbi.abi, signer)
@@ -56,15 +56,4 @@ export const getSwapAmount = async (contract, _tokenA, _tokenB, _amountA) => {
   const tokenBAmount = await contract.getMinOutputAmount(_tokenA, _tokenB, amountA);
   const tokenB18Amount = toEth(tokenBAmount);
   return tokenB18Amount;
-}
-
-export const username = (address) => {
-  let temp1 = address.substring(0, 5)
-  let temp2 = address.substring(address.length - 3)
-  return temp1 + '...' + temp2
-}
-
-export const date_time = (unixTime) => {
-  const date = new Date(unixTime * 1000)
-  return date
 }

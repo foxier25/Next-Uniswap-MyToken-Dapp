@@ -5,9 +5,9 @@ export default [
     logoURI: 'eth.png',
   },
   {
-    name: 'RRM Token',
+    name: 'MTK Token',
     address: '0x1d3999858b8f589072944e55c31Af0F32cF8F7D1',
-    symbol: 'RRM',
+    symbol: 'MTK',
     decimals: 18,
     chainId: 11155111,
   },
