@@ -59,7 +59,7 @@ const Home = () => {
     e.preventDefault()
     setIsSwapping(true)
     let flag = true;
-    if (tokenA.symbol == "MTK") {
+    if (tokenA.symbol == MyTokenSymbol) {
       flag = false;
       setSwapDetails({...swapDetails, tokenAAddress: MTKAddress, tokenBAddress: WETHAddress});
     }
@@ -100,7 +100,7 @@ const Home = () => {
     }
     if(!(!tokenA || !tokenB || tokenA && tokenB && tokenA.symbol == tokenB.symbol || tokenA == tokenB)) {
       let flag = true;
-      if (tokenA.symbol == "MTK") flag = false;
+      if (tokenA.symbol == MyTokenSymbol) flag = false;
       const tokenBAmount = await getSwapAmount(contract,
         flag ? WETHAddress : MTKAddress,
         flag ? MTKAddress : WETHAddress,
@@ -108,6 +108,15 @@ const Home = () => {
       );
       setSwapDetails({ ...swapDetails, tokenBAmount: tokenBAmount.toString(), tokenAAmount: e.target.value })
     }
+  }
+
+  const changeTokenBAmount = async (e) => {
+      setSwapDetails({ ...swapDetails, tokenBAmount: e.target.value })
+  }
+
+  const changeToken = () => {
+    setTokenModal(true); 
+    setIsSwapToken(true);
   }
 
   return (
@@ -133,13 +142,10 @@ const Home = () => {
                 type="number"
                 placeholder="0.0"
                 step={0.00001}
-                onChange={async (e) => {
-                  callGetSwapAmount(e);
-                }
-                }
+                onChange={callGetSwapAmount}
               />
               <div
-                onClick={() => { setTokenModal(true); setIsSwapToken(true); }}
+                onClick={() => { setTokenModal(true); setIsSwapToken(false); }}
                 className="flex cursor-pointer items-center gap-x-2 rounded-2xl bg-gray-700 
             px-3 py-2 font-medium transition ease-in-out hover:bg-gray-600"
               >
@@ -169,9 +175,7 @@ const Home = () => {
                 disabled
                 placeholder="0.0"
                 value={swapDetails.tokenBAmount}
-                onChange={(e) =>
-                  setSwapDetails({ ...swapDetails, tokenBAmount: e.target.value })
-                }
+                onChange={changeTokenBAmount}
               />
               <div
                 onClick={() => { setTokenModal(true); setIsSwapToken(false); }}
@@ -195,7 +199,7 @@ const Home = () => {
               <button
                 disabled={isSwapping || !tokenA || !tokenB || tokenA && tokenB && tokenA.symbol == tokenB.symbol || tokenA == tokenB}
                 type="submit"
-                onClick={(e) => performSwap(e)}
+                onClick={performSwap}
                 className={`mt-2 flex w-full items-center justify-center gap-x-2 rounded-xl  bg-[#132b49] p-3
               font-medium text-[#3d84e9] transition ease-in-out ${!(isSwapping || !tokenA || !tokenB || tokenA && tokenB && tokenA.symbol == tokenB.symbol || tokenA == tokenB) && 'hover:bg-[#163152]'
                   }`}
@@ -217,7 +221,7 @@ const Home = () => {
               <button
                 className="mt-2 w-full rounded-xl bg-[#132b49]  p-3 font-medium
               text-[#3d84e9] transition ease-in-out hover:bg-[#163152]"
-                onClick={() => web3Handler()}
+                onClick={web3Handler}
               >
                 Connect Wallet
               </button>
@@ -226,10 +230,9 @@ const Home = () => {
       </main>
 
       <AnimatePresence>
-        {tokenModal && (isSwapToken ?
-          <TokenModal setTokenModal={setTokenModal} setToken={setTokenA} />
-          : <TokenModal setTokenModal={setTokenModal} setToken={setTokenB} />
-        )}
+        {tokenModal &&
+          <TokenModal setTokenModal={setTokenModal} setToken={isSwapToken? setTokenA : setTokenB} />
+        }
         {alert && <ErrorModel transactionFailed closeModal={setAlert} />}
         {/* {networkApproved && <ErrorModel selectedNetwork />} */}
       </AnimatePresence>
